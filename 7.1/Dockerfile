@@ -7,7 +7,7 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-ADD conf/uploads.tmpl /usr/local/etc/php/conf.d/default.tmpl
+ADD conf/uploads.tmpl /usr/local/etc/php/conf.d/uploads.tmpl
 
-ENTRYPOINT dockerize -template /usr/local/etc/php/conf.d/default.tmpl:/usr/local/etc/php/conf.d/default.ini
+ENTRYPOINT dockerize -template /usr/local/etc/php/conf.d/uploads.tmpl:/usr/local/etc/php/conf.d/uploads.ini
 CMD php-fpm
