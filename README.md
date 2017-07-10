@@ -7,6 +7,19 @@ This image based on official php image.
 
 `MAX_UPLOAD_FILE_SIZE`: adjust max post and upload sizes.
 
+# Whats included
+
+- curl
+- mcrypt
+- mysqli
+- pdo_mysql
+- pdo_pgsql extention
+- pdo_pgsql \
+- gd 
+- redis 
+- bcmath
+- zip
+
 # docker-compose example
 
 ~~~
