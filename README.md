@@ -13,8 +13,7 @@ This image based on official php image.
 - mcrypt
 - mysqli
 - pdo_mysql
-- pdo_pgsql extention
-- pdo_pgsql \
+- pdo_pgsql 
 - gd 
 - redis 
 - bcmath
