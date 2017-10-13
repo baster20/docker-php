@@ -1,6 +1,4 @@
-FROM php:7.1-fpm
-
-VOLUME /var/www/html
+FROM php:7.2-rc-cli
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -14,8 +12,6 @@ RUN apt-get update \
     libssl-dev \
     libmcrypt-dev \
     gettext-base \
-    git \
-    sudo \
   && rm -rf /var/lib/apt/lists/*
 
 # Set the PHP redis version
@@ -46,18 +42,8 @@ RUN docker-php-ext-install mcrypt \
   && rm -r phpredis-$PHPREDIS_VERSION \
   && docker-php-ext-enable redis
 
-# Setup the Composer
-RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
-  && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
-  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" \
-  && php /tmp/composer-setup.php \
-  && php -r "unlink('/tmp/composer-setup.php');" \
-  && mv composer.phar /usr/local/bin/composer
-
 RUN usermod -u 1000 www-data
 
-ADD ./templates/uploads.tmpl /opt/uploads.tmpl
-ADD ./scripts/entrypoint.sh /usr/bin/entrypoint
-
-ENTRYPOINT ["entrypoint"]
-CMD ["php-fpm"]
+VOLUME /var/www/html
+WORKDIR /var/www/html
+USER www-data
