@@ -22,8 +22,7 @@ RUN apt-get update \
 ENV PHPREDIS_VERSION 3.1.4
 
 # Install PHP extentions
-RUN docker-php-ext-install mcrypt \
-  && docker-php-ext-install mysqli \
+RUN docker-php-ext-install mysqli \
   && docker-php-ext-install pdo_mysql \
   && docker-php-ext-install pdo_pgsql \
   && docker-php-ext-configure gd \
